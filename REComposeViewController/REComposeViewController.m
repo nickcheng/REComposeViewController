@@ -217,6 +217,10 @@
 {
     _attachmentImage = attachmentImage;
     _sheetView.attachmentImageView.image = _attachmentImage;
+  _sheetView.attachmentImageView.frame = CGRectMake(_sheetView.attachmentImageView.frame.origin.x,
+                                                    _sheetView.attachmentImageView.frame.origin.y,
+                                                    _sheetView.attachmentImageView.frame.size.width,
+                                                    _attachmentImage.size.height / _attachmentImage.size.width * _sheetView.attachmentImageView.frame.size.width);
 }
 
 - (BOOL)hasAttachment
