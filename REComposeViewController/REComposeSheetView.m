@@ -69,9 +69,6 @@
         _attachmentImageView.layer.masksToBounds = YES;
         [_attachmentView addSubview:_attachmentImageView];
         
-        _attachmentContainerView = [[UIImageView alloc] initWithFrame:_attachmentView.bounds];
-        _attachmentContainerView.image = [UIImage imageNamed:@"REComposeViewController.bundle/AttachmentFrame"];
-        [_attachmentView addSubview:_attachmentContainerView];
         _attachmentView.hidden = YES;
     
         [self addSubview:_navigationBar];
