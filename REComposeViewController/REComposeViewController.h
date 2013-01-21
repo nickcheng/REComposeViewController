@@ -45,6 +45,7 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeResult result)
     UIImageView *_paperclipView;
     BOOL _hasAttachment;
     UIImage *_attachmentImage;
+  
 }
 
 - (UINavigationItem *)navigationItem;
@@ -61,6 +62,9 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeResult result)
 @property (copy, nonatomic) REComposeViewControllerCompletionHandler completionHandler;
 @property (weak, nonatomic) id <REComposeViewControllerDelegate> delegate;
 @property (assign, readwrite, nonatomic) NSInteger cornerRadius;
+@property (nonatomic, assign) BOOL canSendEmptyContent;
+@property (nonatomic, assign) BOOL showWordCount;
+@property (nonatomic, assign) NSInteger wordCount;
 
 @end
 

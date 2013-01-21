@@ -25,12 +25,22 @@
 
 #import "REComposeViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "NSString+nLibrary.h"
 
-@interface REComposeViewController ()
+@interface REComposeViewController () <UITextViewDelegate>
 
 @end
 
-@implementation REComposeViewController
+@implementation REComposeViewController {
+  UILabel *_wordCountLabel;
+  BOOL _canSendEmptyContent;
+  BOOL _showWordCount;
+  NSInteger _wordCount;
+}
+
+@synthesize canSendEmptyContent = _canSendEmptyContent;
+@synthesize showWordCount = _showWordCount;
+@synthesize wordCount = _wordCount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +48,7 @@
     if (self) {
         _cornerRadius = 10;
         _sheetView = [[REComposeSheetView alloc] initWithFrame:CGRectMake(0, 0, self.currentWidth - 8, 202)];
+      _showWordCount = NO;
     }
     return self;
 }
@@ -70,6 +81,7 @@
     _sheetView.layer.cornerRadius = _cornerRadius;
     _sheetView.clipsToBounds = YES;
     _sheetView.delegate = self;
+  _sheetView.textView.delegate = self;
     
     [self.view addSubview:_backgroundView];
     [_containerView addSubview:_backView];
@@ -80,6 +92,17 @@
     _paperclipView.image = [UIImage imageNamed:@"REComposeViewController.bundle/PaperClip"];
     [_containerView addSubview:_paperclipView];
     [_paperclipView setHidden:YES];
+  
+  _wordCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 40, 185, 30, 10)];
+  _wordCountLabel.text = [NSString stringWithFormat:@"%d", self.wordCount - [self.text chineseLength]];
+  _wordCountLabel.font = [UIFont boldSystemFontOfSize:13.f];
+  _wordCountLabel.textAlignment = NSTextAlignmentRight;
+  _wordCountLabel.textColor = [UIColor grayColor];
+  _wordCountLabel.backgroundColor = [UIColor clearColor];
+  _wordCountLabel.shadowColor = [UIColor whiteColor];
+  _wordCountLabel.shadowOffset = CGSizeMake(0.f, 1.f);
+  [_containerView addSubview:_wordCountLabel];
+  _wordCountLabel.hidden = !self.showWordCount;
     
     if (!_attachmentImage)
         _attachmentImage = [UIImage imageNamed:@"REComposeViewController.bundle/URLAttachment"];
@@ -266,6 +289,25 @@
         _completionHandler(REComposeResultPosted);
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark UITextViewDelegate
+
+- (void)textViewDidChange:(UITextView *)textView {
+  //
+  if (self.canSendEmptyContent)
+    self.navigationItem.rightBarButtonItem.enabled = textView.text.length > 0;
+  
+  //
+  if (self.showWordCount) {
+    NSInteger restCount = self.wordCount - [textView.text chineseLength];
+    _wordCountLabel.text = [NSString stringWithFormat:@"%d", restCount];
+    if (restCount < 0)
+      _wordCountLabel.textColor = [UIColor redColor];
+    else
+      _wordCountLabel.textColor = [UIColor grayColor];
+  }
 }
 
 #pragma mark -
