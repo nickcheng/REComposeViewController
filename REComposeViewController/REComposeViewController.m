@@ -296,7 +296,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
   //
-  if (self.canSendEmptyContent)
+  if (!self.canSendEmptyContent)
     self.navigationItem.rightBarButtonItem.enabled = textView.text.length > 0;
   
   //
