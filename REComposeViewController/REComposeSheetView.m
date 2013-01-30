@@ -42,10 +42,10 @@
         _navigationItem = [[UINavigationItem alloc] initWithTitle:@""];
         _navigationBar.items = @[_navigationItem];
         
-        UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonPressed)];
+        UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"REComposeSheetView_Cancel", nil, [NSBundle mainBundle], @"Cancel", @"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonPressed)];
         _navigationItem.leftBarButtonItem = cancelButtonItem;
         
-        UIBarButtonItem *postButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Post", @"Post") style:UIBarButtonItemStyleBordered target:self action:@selector(postButtonPressed)];
+        UIBarButtonItem *postButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"REComposeSheetView_Post", nil, [NSBundle mainBundle], @"Post", @"Post") style:UIBarButtonItemStyleBordered target:self action:@selector(postButtonPressed)];
         _navigationItem.rightBarButtonItem = postButtonItem;
         
         
@@ -86,14 +86,16 @@
 
 - (void)cancelButtonPressed
 {
-    if ([_delegate respondsToSelector:@selector(cancelButtonPressed)])
-        [_delegate cancelButtonPressed];
+    id<REComposeSheetViewDelegate> local_delegate = _delegate;
+    if ([local_delegate respondsToSelector:@selector(cancelButtonPressed)])
+        [local_delegate cancelButtonPressed];
 }
 
 - (void)postButtonPressed
 {
-    if ([_delegate respondsToSelector:@selector(postButtonPressed)])
-        [_delegate postButtonPressed];
+    id<REComposeSheetViewDelegate> local_delegate = _delegate;
+    if ([local_delegate respondsToSelector:@selector(postButtonPressed)])
+        [local_delegate postButtonPressed];
 }
 
 @end
