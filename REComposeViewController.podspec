@@ -18,7 +18,7 @@ DESC
   s.source       = { :git => "https://github.com/romaonthego/REComposeViewController.git",
                      :tag => "1.1" }
 
-  s.source_files = 'REComposeViewController'
+  s.source_files = 'REComposeViewController', 'REComposeViewController/Categories/*.{h,m}'
   s.public_header_files = 'REComposeViewController/*.h'
 
   s.resources = "REComposeViewController/REComposeViewController.bundle"
