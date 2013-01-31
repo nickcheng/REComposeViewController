@@ -15,7 +15,8 @@ DESC
   s.ios.deployment_target = '5.0'
   s.requires_arc          = true
 
-  s.source       = { :git => "https://github.com/nickcheng/REComposeViewController.git" }
+  s.source       = { :git => "https://github.com/romaonthego/REComposeViewController.git",
+                     :tag => "1.1" }
 
   s.source_files = 'REComposeViewController'
   s.public_header_files = 'REComposeViewController/*.h'
