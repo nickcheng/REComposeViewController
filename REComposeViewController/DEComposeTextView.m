@@ -80,6 +80,9 @@
     _ruledView.lineWidth = 1.0f;
     _ruledView.rowHeight = self.font.lineHeight;
     [self insertSubview:self.ruledView atIndex:0];
+
+  if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) // For iOS 7
+    self.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 

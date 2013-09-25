@@ -101,6 +101,8 @@
   _wordCountLabel.backgroundColor = [UIColor clearColor];
   _wordCountLabel.shadowColor = [UIColor whiteColor];
   _wordCountLabel.shadowOffset = CGSizeMake(0.f, 1.f);
+  if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) // For iOS 7
+    _wordCountLabel.frame = CGRectOffset(_wordCountLabel.frame, 0, -3);
   [_containerView addSubview:_wordCountLabel];
   _wordCountLabel.hidden = !self.showWordCount;
     
