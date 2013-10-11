@@ -105,6 +105,8 @@
     _wordCountLabel.frame = CGRectOffset(_wordCountLabel.frame, 0, -3);
   [_containerView addSubview:_wordCountLabel];
   _wordCountLabel.hidden = !self.showWordCount;
+  
+  [self textViewDidChange:_sheetView.textView];
     
     if (!_attachmentImage)
         _attachmentImage = [UIImage imageNamed:@"REComposeViewController.bundle/URLAttachment"];
